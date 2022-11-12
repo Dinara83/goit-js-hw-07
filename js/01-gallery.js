@@ -32,9 +32,17 @@ function onOpenColectionClick(evt) {
   window.instance = basicLightbox.create(`
 <img src="${evt.target.dataset.source}">
 `);
+  // {
+  // 	onShow: () =>
+  // 	  window.addEventListener("keydown", closeModalWindowByEscPressing),
+  // 	onClose: () => {
+  // 	  window.removeEventListener("keydown", closeModalWindowByEscPressing);
+  // 	  refs.body.classList.remove("disable-scroll");
+  // 	},
+  //
+  // }
   instance.show();
 }
-
 const lazyImages = document.querySelectorAll('.lazyload');
 lazyImages.forEach(image => {
   image.addEventListener('load', onImageLoaded, { once: true });
