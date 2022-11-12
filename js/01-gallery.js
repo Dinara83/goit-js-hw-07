@@ -35,28 +35,12 @@ function onOpenGalleryColection(evt) {
 	  `,
   );
   instance.show();
+  refs.galleryEl.addEventListener('keydown', evt => {
+    if (evt.key === 'Escape') {
+      instance.close();
+    }
+  });
 }
-
-// function modalWindowShow(evt) {
-//   {
-// onShow: () => {
-//   window.addEventListener('keydown', onEscKeydown);
-// };
-
-//     onClose: () => {
-//       window.removeEventListener('keydown', onEscKeydown);
-//       refs.body.classList.remove('img.[data-source]');
-//     };
-//   }
-//   instance.show();
-// }
-// function onEscKeydown(evt) {
-//   const ESC_KEY_CODE = 'Escape';
-//   const isEscKey = evt.code === ESC_KEY_CODE;
-//   if (isEscKey) {
-//     onClose();
-//   }
-// }
 
 const lazyImages = document.querySelectorAll('.lazyload');
 lazyImages.forEach(image => {
