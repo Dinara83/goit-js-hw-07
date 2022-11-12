@@ -3,7 +3,6 @@ import { galleryItems } from './gallery-items.js';
 const refs = {
   galleryEl: document.querySelector('.gallery'),
   body: document.querySelector('body'),
-  //   imagEl: document.querySelector('gallery__link'),
 };
 
 const makeGalleryItemsColection = ({ preview, original, description }) => {
@@ -22,27 +21,43 @@ const makeGalleryItemsColection = ({ preview, original, description }) => {
 const makeColectionImage = galleryItems.map(makeGalleryItemsColection).join('');
 
 refs.galleryEl.insertAdjacentHTML('beforeend', makeColectionImage);
-refs.body.addEventListener('click', onOpenColectionClick);
+refs.body.addEventListener('click', onOpenGalleryColection);
 
-function onOpenColectionClick(evt) {
+function onOpenGalleryColection(evt) {
   evt.preventDefault();
-  if (evt.target.nodeName !== 'IMG') {
+  const isGalleryImage = evt.target.classList.contains('gallery__image');
+  if (!isGalleryImage) {
     return;
   }
-  window.instance = basicLightbox.create(`
-<img src="${evt.target.dataset.source}">
-`);
-  // {
-  // 	onShow: () =>
-  // 	  window.addEventListener("keydown", closeModalWindowByEscPressing),
-  // 	onClose: () => {
-  // 	  window.removeEventListener("keydown", closeModalWindowByEscPressing);
-  // 	  refs.body.classList.remove("disable-scroll");
-  // 	},
-  //
-  // }
+  window.instance = basicLightbox.create(
+    `
+	  <img src="${evt.target.dataset.source}">
+	  `,
+  );
   instance.show();
 }
+
+// function modalWindowShow(evt) {
+//   {
+// onShow: () => {
+//   window.addEventListener('keydown', onEscKeydown);
+// };
+
+//     onClose: () => {
+//       window.removeEventListener('keydown', onEscKeydown);
+//       refs.body.classList.remove('img.[data-source]');
+//     };
+//   }
+//   instance.show();
+// }
+// function onEscKeydown(evt) {
+//   const ESC_KEY_CODE = 'Escape';
+//   const isEscKey = evt.code === ESC_KEY_CODE;
+//   if (isEscKey) {
+//     onClose();
+//   }
+// }
+
 const lazyImages = document.querySelectorAll('.lazyload');
 lazyImages.forEach(image => {
   image.addEventListener('load', onImageLoaded, { once: true });
