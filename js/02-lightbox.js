@@ -13,26 +13,6 @@ const makeGalleryItemsColection = ({ preview, original, description }) => {
 const makeColectionImage = galleryItems.map(makeGalleryItemsColection).join('');
 
 refs.galleryEl.insertAdjacentHTML('beforeend', makeColectionImage);
-refs.body.addEventListener('click', onOpenGalleryColection);
-
-function onOpenGalleryColection(evt) {
-  evt.preventDefault();
-  const isGalleryImage = evt.target.classList.contains('gallery__image');
-  if (!isGalleryImage) {
-    return;
-  }
-  window.instance = basicLightbox.create(
-    `
-  	  <img src="${evt.target.dataset.source}">
-  	  `,
-  );
-  instance.show();
-  refs.galleryEl.addEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
-      instance.close();
-    }
-  });
-}
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
